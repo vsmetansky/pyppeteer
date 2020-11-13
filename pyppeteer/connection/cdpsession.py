@@ -90,12 +90,8 @@ class CDPSession(AsyncIOEventEmitter):
 
     def _onClosed(self) -> None:
         for cb in self._callbacks.values():
-            cb.set_exception(
-                rewriteError(
-                    cb.error,  # type: ignore
-                    f'Protocol error {cb.method}: Target closed.',  # type: ignore
-                )
-            )
+            if not cb.done():
+                cb.cancel()
         self._callbacks.clear()
         self._connection = None
         self.emit(Events.CDPSession.Disconnected)

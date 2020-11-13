@@ -179,12 +179,8 @@ class Connection(AsyncIOEventEmitter):
         self._transport.onclose = None
 
         for cb in self._callbacks.values():
-            cb.set_exception(
-                rewriteError(
-                    cb.error,  # type: ignore
-                    f'Protocol error {cb.method}: Target closed.',  # type: ignore
-                )
-            )
+            if not cb.done():
+                cb.cancel()
         self._callbacks.clear()
 
         for session in self._sessions.values():
