@@ -93,7 +93,7 @@ class Connection(AsyncIOEventEmitter):
                     logger.warning(f'Transport connection closed: {excpt}')
                     break
                 # wait 1 async loop frame, no other data will be accessible in between frames
-                await asyncio.sleep(0)
+                await asyncio.sleep(0.01)
         except Exception as excpt:
             await self.dispose(reason=str(excpt))
             raise excpt
