@@ -89,7 +89,8 @@ class Connection(AsyncIOEventEmitter):
             while self._connected:
                 try:
                     await self.connection.recv()
-                except (websockets.ConnectionClosed, ConnectionResetError) as excpt:
+                except (websockets.ConnectionClosed, ConnectionResetError, 
+                        websockets.ConnectionClosedError) as excpt:
                     logger.warning(f'Transport connection closed: {excpt}')
                     break
                 # wait 1 async loop frame, no other data will be accessible in between frames
