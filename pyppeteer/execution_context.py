@@ -3,6 +3,7 @@
 
 """Execution Context Module."""
 
+import asyncio
 import logging
 import math
 import re
@@ -146,6 +147,8 @@ class ExecutionContext:
 
 
 def rewriteError(error: Exception) -> Union[None, Dict[str, Dict[str, str]]]:
+    if isinstance(error, asyncio.CancelledError):
+        raise error
     msg = error.args[0]
     if 'Object reference chain is too long' in msg:
         return {'result': {'type': 'undefined'}}
