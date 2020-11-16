@@ -62,7 +62,7 @@ class CDPSession(AsyncIOEventEmitter):
         id_ = msg.get('id')
         callback = self._callbacks.get(id_)
         if id_ and id_ in self._callbacks:
-            if msg.get('error'):
+            if msg.get('error') and 'Invalid InterceptionId' != msg['error']['message']:
                 callback.set_exception(
                     createProtocolError(
                         callback.error,  # type: ignore
