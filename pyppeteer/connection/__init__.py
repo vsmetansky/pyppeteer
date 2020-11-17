@@ -163,7 +163,7 @@ class Connection(AsyncIOEventEmitter):
             # Callbacks could be all rejected if someone has called `.dispose()`
             callback = self._callbacks.get(loaded_msg['id'])
             if callback:
-                if loaded_msg.get('error'):
+                if loaded_msg.get('error') and 'Invalid InterceptionId' not in loaded_msg['error']['message']:
                     callback.set_exception(createProtocolError(callback.error, callback.method, loaded_msg))
                 else:
                     callback.set_result(loaded_msg.get('result'))
