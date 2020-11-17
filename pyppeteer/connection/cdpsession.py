@@ -70,7 +70,7 @@ class CDPSession(AsyncIOEventEmitter):
                         msg,
                     )
                 )
-            else:
+            elif not callback.done():
                 callback.set_result(msg.get('result'))
             del self._callbacks[id_]
         else:
