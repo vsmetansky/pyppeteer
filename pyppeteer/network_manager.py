@@ -413,7 +413,8 @@ class Request:
                 # In certain cases, protocol will return error if the request was already canceled
                 # or the page was closed. We should tolerate these errors.
                 # (logger.exception will pick up the stack trace for us)
-                logger.exception(f'An exception occurred while trying to continue the request')
+                # logger.exception(f'An exception occurred while trying to continue the request')
+                pass
 
     async def respond(
         self, status: int = 200, headers: Dict[str, str] = None, contentType: str = None, body: Union[bytes, str] = None
@@ -505,7 +506,8 @@ class Request:
             except Exception as e:
                 # In certain cases, protocol will return error if the request was already canceled
                 # or the page was closed. We should tolerate these errors.
-                logger.error(f'An exception occurred: {e}')
+                # logger.error(f'An exception occurred: {e}')
+                pass
 
     @property
     def _is_actionable_request(self) -> bool:
