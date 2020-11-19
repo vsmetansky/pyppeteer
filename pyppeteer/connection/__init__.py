@@ -165,7 +165,7 @@ class Connection(AsyncIOEventEmitter):
             if callback:
                 if loaded_msg.get('error'):
                     callback.cancel()
-                else:
+                elif not callback.done():
                     callback.set_result(loaded_msg.get('result'))
                 del self._callbacks[loaded_msg['id']]
         else:
