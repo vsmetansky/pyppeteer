@@ -61,7 +61,8 @@ class Target:
         return self._initializedPromise.set_result(True)
 
     def _closedCallback(self) -> None:
-        self._isClosedPromise.set_result(None)
+        if not self._isClosedPromise.done():
+            self._isClosedPromise.set_result(None)
 
     async def createCDPSession(self) -> CDPSession:
         """Create a Chrome Devtools Protocol session attached to the target."""
