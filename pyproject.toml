@@ -47,9 +47,9 @@ pyppeteer-install = 'pyppeteer.command:install'
 python = "^3.6.1"
 aenum = "^2.2.3"
 appdirs = "^1.4.3"
-certifi = ">=2019.11.28"
+certifi = "2019.3.9"
 ordered_set = "^4.0.1"
-pillow = "^7.1.2"
+pillow = "5.4.1"
 pyee = "^7.0.1"
 tqdm = "^4.42.1"
 typing_extensions = { version ="^3.7.4", python = '<3.8'}
